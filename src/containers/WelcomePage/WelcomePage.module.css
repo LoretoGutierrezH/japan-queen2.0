@@ -1,0 +1,40 @@
+.welcomeContainer {
+  background-color: black;
+  /* width: 100%; */
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoContainer {
+  width: 40%;
+}
+
+.logoContainer > img {
+  width: 100%;
+  margin-top: -1rem;
+}
+
+.wavesContainer {
+  width: 40%;
+  align-self: flex-end;
+  position: absolute;
+  right: 0rem;
+  bottom: 0rem;
+}
+
+.authBtn {
+  border: none;
+  background-color: #CF152D;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  position: relative;
+  bottom: -1rem;
+}
+
+.wavesContainer > img {
+  width: 100%;
+}

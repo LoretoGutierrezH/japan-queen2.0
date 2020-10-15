@@ -1,0 +1,15 @@
+.header {
+  background-color: black;
+  height: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.wavesContainer {
+  width: 30%
+}
+
+.wavesContainer > img {
+  width: 100%;
+  margin-top: 1rem;
+}
