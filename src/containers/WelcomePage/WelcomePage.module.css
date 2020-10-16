@@ -9,7 +9,7 @@
 }
 
 .logoContainer {
-  width: 40%;
+  width: 30%;
 }
 
 .logoContainer > img {
@@ -29,7 +29,7 @@
   border: none;
   background-color: #CF152D;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
   border-radius: 5px;
   position: relative;
   bottom: -1rem;
