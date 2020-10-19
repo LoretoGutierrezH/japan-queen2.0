@@ -11,7 +11,7 @@ const  App = () => {
         <Switch>
           <Route path="/" component={WelcomePage} exact />
           <Route path="/chef" component={IncomingOrders} />
-          <Route path="/mesero/menú" component={Menu} />
+          <Route path="/mesero/menú/:id" component={Menu}/>
           <Route path="/mesero" component={WaiterMainPage} />
         </Switch>
     </Router>

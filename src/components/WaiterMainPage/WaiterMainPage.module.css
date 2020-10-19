@@ -1,0 +1,45 @@
+.waiterMainPage {
+  background-color:  #CF152D;
+  color: white;
+  min-height: 96vh;
+}
+
+.devilAndControls {
+  display: flex;
+  justify-content: center;
+  border: 1px solid blue;
+}
+
+
+.devilContainer {
+  width: 20%;
+}
+
+.devilContainer > img {
+  width: 100%;
+}
+
+
+.optionsBox {
+  width: 30%;
+  min-height: 30rem;
+  margin: 0 auto;
+  text-align: center;
+  background: rgba(16,17,19,.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.btnContainer {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuBtn {
+  margin-bottom: 1rem;
+  padding: 0rem 4rem;
+}

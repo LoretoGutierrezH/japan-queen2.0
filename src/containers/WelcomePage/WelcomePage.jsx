@@ -10,7 +10,7 @@ const WelcomePage = (props) => {
       <div className={style.logoContainer}>
         <img src={logo} alt="Logo de Japan Queen"/>
       </div>
-      <Link to="/chef"><button className={style.authBtn}>Entrar</button></Link>
+      <Link to="/mesero"><button className={style.authBtn}>Entrar</button></Link>
       <div className={style.wavesContainer}>
         <img src={waves} alt="Olas de colores, parte del diseño de marca de Japan Queen"/>
       </div>

@@ -1,0 +1,136 @@
+[
+  {
+    "breakfastMenu": [
+      {
+        "id": 1,
+        "name": "Café americano",
+        "price": 2000
+      },
+      {
+        "id": 2,
+        "name": "Café con leche",
+        "price": 2500
+      },
+      {
+        "id": 3,
+        "name": "Jugo del día",
+        "price": 1800
+      },
+      {
+        "id": 4,
+        "name": "Té Matcha",
+        "price": 3000
+      },
+      {
+        "id": 5,
+        "name": "Gyozas (6 unidades)",
+        "price": 4000
+      },
+      {
+        "id": 6,
+        "name": "Tamagoyaki",
+        "price": 2500
+      },
+      {
+        "id": 7,
+        "name": "Tostadas",
+        "price": 2000
+      },
+      {
+        "id": 8,
+        "name": "Yakimanju",
+        "price": 800
+      }
+    ],
+    "lunchDinnerMenu": {
+      "mainCourse": [
+        {
+          "id": 9,
+          "name": "Ramen de cerdo",
+          "price": 5990
+        },
+        {
+          "id": 10,
+          "name": "Ramen vegetariano",
+          "price": 5990
+        },
+        {
+          "id": 11,
+          "name": "Ramen de res",
+          "price": 5990
+        },
+        {
+          "id": 12,
+          "name": "Shirashi",
+          "price": 5990
+        },
+        {
+          "id": 13,
+          "name": "Yakisoba",
+          "price": 4500
+        }
+      ],
+      "sideDish": [
+        {
+          "id": 14,
+          "name": "Yakimeshi",
+          "price": 3500
+        },
+        {
+          "id": 15,
+          "name": "Takoyaki (6 unidades)",
+          "price": 4500
+        },
+        {
+          "id": 16,
+          "name": "Gohan",
+          "price": 3500
+        }
+      ],
+      "drinks": [
+        {
+          "id": 17,
+          "name": "Agua 500 ml",
+          "price": 1500
+        },
+        {
+          "id": 18,
+          "name": "Bebida gaseosa",
+          "price": 2000
+        },
+        {
+          "id": 19,
+          "name": "Sake",
+          "price": 3500
+        },
+        {
+          "id": 20,
+          "name": "Té verde",
+          "price": 2000
+        },
+        {
+          "id": 21,
+          "name": "Aloe vera",
+          "price": 2500
+        }
+      ],
+      "extras": [
+        {
+          "id": 22,
+          "name": "Queso crema",
+          "price": 900
+        },
+        {
+          "id": 23,
+          "name": "Palta",
+          "price": 900
+        },
+        {
+          "id": 24,
+          "name": "Salsa Teriyaki",
+          "price": 400
+        }
+      ]
+    }
+  }
+]

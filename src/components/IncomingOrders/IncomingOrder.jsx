@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './IncomingOrders.module.css';
-import waves from '../../assets/olitascard.png';
 import Counter from '../Counter/Counter.jsx';
 
 const IncomingOrder = (props) => {
