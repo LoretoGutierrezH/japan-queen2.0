@@ -1,13 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 const Product = (props) => {
+
   return (
     <Fragment>
-        <tr>
-          <td>{props.name}</td>
-          <td>{props.price}</td>
+        <tr id={props.id} onChange={props.addOrder}>
+          <td data-name={props.name}>{props.name}</td>
+          <td data-price={props.price}>{props.price}</td>
           <td>
-            <select name="quaintity" id="" defaultValue="0">
+            <select name="quantity" id="" defaultValue="0">
+              <option value="0">0</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
