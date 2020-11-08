@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 
 const Product = (props) => {
-
+  const optionsRefs = useRef();
   return (
     <Fragment>
         <tr id={props.id} onChange={props.addOrder}>

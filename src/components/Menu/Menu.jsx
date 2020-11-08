@@ -5,12 +5,16 @@ import Product from '../Product/Product.jsx';
 import style from './Menu.module.css';
 import Orders from '../Order/Orders.jsx';
 
+
 const Menu = (props) => {
   const [menu, setMenu] = useState([]);
   const [orders, setOrders] = useState({
     ordersList: [],
     total: '',
   });
+
+  
+ 
 
   const getTotal = (orders) => {
     const total = orders.reduce((sum, item) => {
@@ -29,7 +33,6 @@ const Menu = (props) => {
 
    
     const newOrder = {
-      orderId: Math.floor(Math.random * 3000),
       productId,
       productName,
       productPrice,
@@ -66,10 +69,14 @@ const Menu = (props) => {
       setMenu(menuJson[0].breakfastMenu);
     } else if (props.match.params.id === 'almuerzo-cena') {
       const lunchDinnerData= menuJson[0].lunchDinnerMenu
-
+      console.log(lunchDinnerData.mainCourse);
+      setMenu([...lunchDinnerData.mainCourse, ...lunchDinnerData.drinks, ...lunchDinnerData.sideDish, ...lunchDinnerData.extras])
+      /* setMenu(lunchDinnerData);
       for (const key in lunchDinnerData) {
         console.log(key, lunchDinnerData[key])
-      }
+
+        
+      } */
     }  
   }, []);
 
