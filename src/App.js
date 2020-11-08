@@ -31,8 +31,13 @@ const  App = (props) => {
     });
   }
 
-  
-  console.log(props.authenticated)
+  //Redirección basada en roles creados a partir del correo electrónico
+  let path;
+  if (props.authenticated && props.role === "waiter") {
+    path = "/mesero";
+  } else if (props.authenticated && props.role === "chef") {
+    path = "/chef";
+  }
   
   return (
     <Router>
@@ -40,7 +45,7 @@ const  App = (props) => {
           <Route path="/" exact>
             <WelcomePage openModal={openModal} />
             <LoginModal modalState={loginModal.modalState} closeModal={closeModal} />
-            {props.authenticated ? <Redirect to="/mesero"></Redirect> : null}
+            <Redirect to={path}></Redirect>
           </Route>
           <Route path="/chef" component={IncomingOrders} />
           <Route path="/mesero/menú/:id" component={Menu}/>
@@ -52,7 +57,8 @@ const  App = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    authenticated: state.authenticated
+    authenticated: state.authenticated,
+    role: state.role
   }
 }
 

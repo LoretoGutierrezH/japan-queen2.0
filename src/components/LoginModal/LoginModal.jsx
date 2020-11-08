@@ -17,7 +17,13 @@ const LoginModal = (props) => {
 
   auth.onAuthStateChanged(user => {
     if (user !== null) {
-      props.onAuthenticate(true);
+      let role;
+      if (user.email.includes('waiter')) {
+        role = 'waiter';
+      } else {
+        role = 'chef';
+      }
+      props.onAuthenticate(true, role);
     } else {
       props.onAuthenticate(false);
     }
@@ -43,7 +49,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuthenticate: (authValue) => dispatch({type: actionTypes.AUTHENTICATE, value: authValue})
+    onAuthenticate: (authValue, role) => dispatch({type: actionTypes.AUTHENTICATE, value: authValue, role: role})
   }
 }
 
