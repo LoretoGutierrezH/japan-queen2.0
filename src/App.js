@@ -31,8 +31,14 @@ const  App = (props) => {
     });
   }
 
+  const signOut = () => {
+    auth.signOut();
+    props.onSignOut(false);
+    console.log('Sesión cerrada');
+  }
+
   //Redirección basada en roles creados a partir del correo electrónico
-  let path;
+  let path = "/";
   if (props.authenticated && props.role === "waiter") {
     path = "/mesero";
   } else if (props.authenticated && props.role === "chef") {
@@ -41,6 +47,9 @@ const  App = (props) => {
   
   return (
     <Router>
+        <Redirect to={path} />
+        <button onClick={signOut}>Cerrar sesión</button>
+
         <Switch>
           <Route path="/" exact>
             <WelcomePage openModal={openModal} />
@@ -62,10 +71,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-/* const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    logIn: () => dispatch({type: actionTypes.AUTHENTICATE})
+    onSignOut: (authValue) => dispatch({type: actionTypes.AUTHENTICATE, value: authValue})
   }
-} */
+}
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -8,11 +8,7 @@ import {connect} from 'react-redux';
 import firebase, {auth} from '../../firebase';
 
 const WaiterMainPage = (props) => {
-  const signOut = () => {
-    auth.signOut();
-    props.onSignOut(false);
-    console.log('Sesión cerrada');
-  }
+  
 
   return (
     <Fragment>
@@ -26,7 +22,6 @@ const WaiterMainPage = (props) => {
           
           <div className={style.controlsContainer}>
             <button>Estado de los pedidos</button>
-            <button onClick={signOut}>Cerrar sesión</button>
           </div>
         </section>
         <section className={style.menuOptionsContainer}>

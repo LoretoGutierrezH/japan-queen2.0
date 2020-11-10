@@ -4,6 +4,7 @@ import menuJson from '../../assets/data/menu.json';
 import Product from '../Product/Product.jsx';
 import style from './Menu.module.css';
 import Orders from '../Order/Orders.jsx';
+import TableSelectionModal from '../../containers/Modals/TableSelectionModal/TableSelectionModal.jsx';
 
 
 const Menu = (props) => {
@@ -12,9 +13,9 @@ const Menu = (props) => {
     ordersList: [],
     total: '',
   });
+  const [table, setTable] = useState(null);
 
-  
- 
+  const [tableModal, setTableModal] = useState({modalState: false});
 
   const getTotal = (orders) => {
     const total = orders.reduce((sum, item) => {
@@ -22,6 +23,21 @@ const Menu = (props) => {
     }, 0)
 
     return total;
+  }
+
+  const addTable = (event) => {
+    const selectedTable = event.currentTarget.value;
+    setTable(selectedTable);
+
+  }
+
+  const closeModal = () => {
+    setTableModal(prevState => {
+      return {
+        modalState: prevState.modalState,
+        modalState: false
+      }
+    })
   }
 
   const addOrder = (event) => {
@@ -80,6 +96,19 @@ const Menu = (props) => {
     }  
   }, []);
 
+  useEffect(() => {
+    const openTableSelectionModal = () => {
+      setTableModal(prevState => {
+        return {
+          modalState: prevState.modalState,
+          modalState: true
+        }
+      })
+    }
+
+    openTableSelectionModal();
+  }, [])
+
   let productsList = null;
   productsList = menu.map(product => {
     return (
@@ -87,9 +116,10 @@ const Menu = (props) => {
     )
   })
 
-
+  console.log(table);
   return (
     <Fragment>
+       <TableSelectionModal modalState={tableModal.modalState} addTable={addTable} table={table} changeTable={() => alert('Cambiando mesa')} closeModal={closeModal}/>
       <Header />
       <main className={style.menu}>
         <section>
@@ -100,7 +130,7 @@ const Menu = (props) => {
             </tbody>
           </table>
         </section>
-        <Orders orders={orders} />
+        <Orders table={table} orders={orders} />
       </main>
     </Fragment>
   );

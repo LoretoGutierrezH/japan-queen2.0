@@ -11,7 +11,10 @@ const LoginModal = (props) => {
     const email = event.currentTarget.email.value;
     const password = event.currentTarget.password.value;
     auth.signInWithEmailAndPassword(`${email}`, `${password}`)
-    .then(done => console.log('Sesión iniciada'))
+    .then(done => {
+      console.log('Sesión iniciada')
+      props.closeModal();
+    })
     .catch(error => console.log(error));
   }
 

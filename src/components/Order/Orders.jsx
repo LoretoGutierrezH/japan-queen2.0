@@ -3,10 +3,12 @@ import Order from './Order.jsx';
 import firebase, {db, auth} from '../../firebase';
 import VerificationModal from '../../containers/Modals/VerificationModal.jsx';
 import AlertModal from '../../containers/Modals/AlertModal/AlertModal.jsx';
+import { Redirect } from 'react-router-dom';
 
 const Orders = (props) => {
   const [verificationModalState, setVerificationModalState] = useState({modalState: false});
   const [alertModalState, setAlertModalState] = useState({modalState: false});
+  const [changeTable, setChangeTable] = useState(false);
 
 
   const openVerificationModal = () => {
@@ -57,13 +59,16 @@ const Orders = (props) => {
 
   const sendOrders = (event) => {
     event.preventDefault();
+    console.log('la mesa', props.table, props.orders)
     db.collection('Orders').add({
+      table: props.table,
       products: props.orders.ordersList,
       total: props.orders.total,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     })
     .then(() => {
       console.log('Pedido agregado a la base de datos');
+      setChangeTable(true);
     })
     .catch(error => {
       console.log(error);
@@ -78,6 +83,7 @@ const Orders = (props) => {
 
   return (
      <section>
+       {changeTable ? <Redirect to="/mesero"/> : null}
        <VerificationModal modalState={verificationModalState.modalState} closeModal={closeVerificationModal} sendOrders={sendOrders} />
        <AlertModal modalState={alertModalState.modalState} closeModal={closeAlertModal} />
 

@@ -1,0 +1,48 @@
+.modalWrapper {
+  position: absolute;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #80808073;
+  top: 0;
+  display: flex;
+  align-items: center;
+}
+
+.modalContent {
+  background-color: #C4C4C4;
+  width: 60%;
+  margin: 0 auto;
+  border-radius: 5px;
+  min-height: 32vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.modalInputs {
+  width: 50%;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  font-family: 'Sedgwick Ave', cursive;
+  font-weight: 400;
+}
+
+.modalInnerButton {
+  background-color: #ED1522;
+  margin-bottom: 2rem;
+  color: white;
+  padding: 1rem 3rem;
+  cursor: pointer;
+}
+
+.closeBtn {
+  position: relative;
+  top: 0;
+  right: -23rem;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
