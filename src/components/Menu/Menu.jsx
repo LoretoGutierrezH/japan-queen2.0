@@ -61,6 +61,7 @@ const Menu = (props) => {
         const filteredOrders = prevOrders.ordersList.filter(order => order.productId !== newOrder.productId);
 
         return {
+          state: 'pending',
           ordersList: filteredOrders,
           total: getTotal(filteredOrders),
         }
@@ -68,11 +69,13 @@ const Menu = (props) => {
         const maintainedOrders = prevOrders.ordersList.filter(order => order.productId !== newOrder.productId);
 
         return {
+          state: 'pending',
           ordersList: [...maintainedOrders, newOrder],
           total: getTotal([...maintainedOrders, newOrder]),
         }
       } else {
         return {
+          state: 'pending',
           ordersList: [...prevOrders.ordersList, newOrder],
           total: getTotal([...prevOrders.ordersList, newOrder]),
         }

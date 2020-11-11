@@ -61,6 +61,7 @@ const Orders = (props) => {
     event.preventDefault();
     console.log('la mesa', props.table, props.orders)
     db.collection('Orders').add({
+      state: props.orders.state,
       table: props.table,
       products: props.orders.ordersList,
       total: props.orders.total,

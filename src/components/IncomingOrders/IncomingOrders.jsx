@@ -16,11 +16,11 @@ const IncomingOrders = (props) => {
   }
  
   useEffect(() => {
-    const unsuscribe = db.collection('Orders').onSnapshot(docs => {
+    const unsuscribe = db.collection('Orders').where('state', '==', 'pending').orderBy('timestamp', 'desc').onSnapshot(docs => {
       const orders = [];
       docs.forEach(doc => {
          orders.push({id: doc.id, ...doc.data()});
-         console.log(doc.id);
+         console.log(doc.data());
       })
       setOrdersState(orders)
     })

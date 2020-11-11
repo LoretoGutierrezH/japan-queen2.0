@@ -28,16 +28,34 @@ const IncomingOrder = (props) => {
     configInterval(setInterval(intervalFunction, 1000)); 
   }
 
-  const updateOrder = () => {
+  const updateOrder = (obj) => {
     db.collection('Orders').doc(`${props.id}`).update({
-      preparationTime: counter.timeToFinish
+      preparationTime: `${obj.h}:${obj.m}:${obj.s}`,
+      state: 'ready'
     })
   }
 
   const stopCounter = () => {
     clearInterval(interval);
-    updateOrder();
+    //updateOrder();
+    updateOrder(setSecondsToTime(counter.timeToFinish));
   }
+
+  const setSecondsToTime = (secs) => {
+      const hours = Math.floor(secs / (60 * 60));
+      const divisorForMinutes = secs % (60 * 60);
+      const minutes = Math.floor(divisorForMinutes / 60);
+      const divisorForSeconds = divisorForMinutes % 60;
+      const seconds = Math.ceil(divisorForSeconds);
+  
+      const obj = {
+        h: hours,
+        m: minutes,
+        s: seconds,
+      };
+      return obj;
+  }
+  
 
   
 
