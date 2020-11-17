@@ -43,3 +43,8 @@
   margin-bottom: 1rem;
   padding: 0rem 4rem;
 }
+
+.alertBtn {
+  background-color: green;
+  color: white;
+}
