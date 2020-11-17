@@ -10,7 +10,7 @@
 
 .modalContent {
   background-color: #C4C4C4;
-  width: 60%;
+  min-width: 60%;
   margin: 0 auto;
   border-radius: 5px;
   min-height: 32vh;

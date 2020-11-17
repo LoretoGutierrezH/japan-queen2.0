@@ -41,9 +41,11 @@ const IncomingOrders = (props) => {
       {props.authenticated === false ? <Redirect to="/"/> : null}
       <Header />
       <main className={style.incomingOrders}>
-        <button onClick={signOut}>Cerrar sesión</button>
+        <div className={style.logoutContainer}>
+         <button onClick={signOut}>Cerrar sesión</button>
+        </div>
         <section className={style.headingContainer}>
-          <h5>Chef</h5>
+          <h2 style={{textDecoration: 'underline'}}>Chef</h2>
           <h5>Pedidos entrantes</h5>
         </section>
         <section className={style.ordersContainer}>

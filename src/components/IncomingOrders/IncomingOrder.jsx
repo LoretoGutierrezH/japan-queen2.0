@@ -9,7 +9,7 @@ const IncomingOrder = (props) => {
   const [time, setTime] = useState(0);
   const [interval, configInterval] = useState(null);
   const products = props.products.map(product => {
-    return <li>{product.productName}</li>
+    return <li style={{margin: '2rem 0rem'}}>{product.productName} <br />Cant.: {product.productQty}</li>
   });
 
   const signOut = () => {

@@ -18,6 +18,13 @@
   margin: 0 auto;
 }
 
+.logoutContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1rem;
+  padding-top: 1rem;
+}
+
 /*ORDER CARDS*/
 .orderCard {
   width: 20rem;
