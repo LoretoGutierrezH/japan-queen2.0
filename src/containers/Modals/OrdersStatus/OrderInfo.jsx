@@ -3,7 +3,7 @@ import style from './OrderInfo.module.css'
 
 const OrderInfo = (props) => {
   const products = props.products.map(product => {
-    return <p><span>{product.productQty}</span> {product.productName}</p>
+    return <p key={product.id}><span>{product.productQty}</span> {product.productName}</p>
   });
   return (
     <tr className={style.readyOrder}>
@@ -13,7 +13,7 @@ const OrderInfo = (props) => {
       </td>
       <td className={style.data}>{props.readySince}</td>
       <td className={style.data}>
-        <button>Entregar</button>
+        <button id={props.id} onClick={props.deliverOrder}>Entregar</button>
       </td>
     </tr>
   );

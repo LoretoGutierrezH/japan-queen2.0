@@ -17,6 +17,7 @@
   display: flex;
   flex-flow: column;
   align-items: center;
+  padding: 4rem;
 }
 
 .modalInputs {
@@ -46,3 +47,9 @@
 .hidden {
   display: none;
 }
+
+.controlsContainer {
+  display: flex;
+  margin-top: 3rem;
+}
+

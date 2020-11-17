@@ -9,7 +9,7 @@ const OrdersStatus = (props) => {
 
   const ordersList = props.orders.map(order => {
     return (
-      <OrderInfo key={order.id} id={order.id} table={order.table} products={order.products} readySince={formattingTime(null, order.readySince)} />
+      <OrderInfo key={order.id} id={order.id} table={order.table} products={order.products} readySince={formattingTime(null, order.readySince)} deliverOrder={props.deliverOrder} />
     )
   })
 
@@ -18,13 +18,15 @@ const OrdersStatus = (props) => {
       <section className={style.modalContent}>
         <h1 onClick={props.closeModal} className={style.closeBtn}>&times;</h1>
         <table>
-          <tr>
-            <th className={style.thead}>Mesa</th>
-            <th className={style.thead}>Productos</th>
-            <th className={style.thead}>Listo desde</th>
-            <th className={style.thead}>Acción</th>
-          </tr>
-          {ordersList}
+          <tbody>
+            <tr>
+              <th className={style.thead}>Mesa</th>
+              <th className={style.thead}>Productos</th>
+              <th className={style.thead}>Listo desde</th>
+              <th className={style.thead}>Acción</th>
+            </tr>
+            {ordersList}
+          </tbody>
         </table>
       </section>
     </article>

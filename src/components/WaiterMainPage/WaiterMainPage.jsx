@@ -53,21 +53,32 @@ const WaiterMainPage = (props) => {
     }
   }, [])
 
+  const deliverOrder = (event) => {
+    const docId = event.target.id;
+    db.collection('Orders').doc(`${docId}`).update({
+      deliveredAt: firebase.firestore.FieldValue.serverTimestamp(),
+      state: 'delivered',
+    });
+  }
+
   return (
     <Fragment>
       {props.authenticated === false ? <Redirect to="/"/> : null}
-      <OrderStatus modalState={modalState.modalState} setModalState={setModalState} orders={orders} closeModal={closeModal} />
+      <OrderStatus modalState={modalState.modalState} setModalState={setModalState} orders={orders} closeModal={closeModal} deliverOrder={deliverOrder} />
       <Header />
       <main className={style.waiterMainPage}>
         <section className={style.devilAndControls}>
+          <div>
+            <div className={style.controlsContainer}>
+              <button className={popUp ? style.alertBtn : null} onClick={openModal}>Estado de los pedidos</button>
+              <button onClick={signOut} style={{marginLeft: '1rem'}}>Cerrar sesión</button>
+            </div>
             <div className={style.devilContainer}>
               <img src={devil} alt=""/>
             </div>
-          
-          <div className={style.controlsContainer}>
-            <button className={popUp ? style.alertBtn : null} onClick={openModal}>Estado de los pedidos</button>
-            <button onClick={signOut}>Cerrar sesión</button>
           </div>
+          
+
         </section>
         <section className={style.menuOptionsContainer}>
           <article className={style.optionsBox}>

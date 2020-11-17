@@ -5,9 +5,12 @@ import Product from '../Product/Product.jsx';
 import style from './Menu.module.css';
 import Orders from '../Order/Orders.jsx';
 import TableSelectionModal from '../../containers/Modals/TableSelectionModal/TableSelectionModal.jsx';
-import firebase, {auth} from '../../firebase';
+import firebase, {auth, db} from '../../firebase';
 import {connect} from 'react-redux';
 import * as actionTypes from '../../store/actionTypes';
+import VerificationModal from '../../containers/Modals/VerificationModal.jsx';
+import AlertModal from '../../containers/Modals/AlertModal/AlertModal.jsx';
+
 
 
 const Menu = (props) => {
@@ -16,9 +19,57 @@ const Menu = (props) => {
     ordersList: [],
     total: '',
   });
-  const [table, setTable] = useState(null);
-
+  const [table, setTable] = useState(1);
   const [tableModal, setTableModal] = useState({modalState: false});
+  const [verificationModalState, setVerificationModalState] = useState({modalState: false});
+  const [alertModalState, setAlertModalState] = useState({modalState: false});
+  const [changeTable, setChangeTable] = useState(false);
+
+  const openVerificationModal = () => {
+    setVerificationModalState(prevState => {
+      return {
+        modalState: prevState.modalState,
+        modalState: true
+      }
+    });
+  }
+
+  const closeVerificationModal = () => {
+    setVerificationModalState(prevState => {
+      return {
+        modalState: prevState.modalState,
+        modalState: false
+      }
+    });
+  }
+
+  const openAlertModal = () => {
+    setAlertModalState(prevState => {
+      return {
+        modalState: prevState.modalState,
+        modalState: true
+      }
+    });
+  }
+
+  const closeAlertModal = () => {
+    setAlertModalState(prevState => {
+      return {
+        modalState: prevState.modalState,
+        modalState: false
+      }
+    });
+  }
+
+
+  const verifyOrAlert = () => {
+    if (orders.ordersList.length === 0) {
+      openAlertModal();
+    } else {
+      openVerificationModal();
+    }
+
+  }
 
   const getTotal = (orders) => {
     const total = orders.reduce((sum, item) => {
@@ -102,16 +153,16 @@ const Menu = (props) => {
     }  
   }, []);
 
-  useEffect(() => {
-    const openTableSelectionModal = () => {
-      setTableModal(prevState => {
-        return {
-          modalState: prevState.modalState,
-          modalState: true
-        }
-      })
-    }
+  const openTableSelectionModal = () => {
+    setTableModal(prevState => {
+      return {
+        modalState: prevState.modalState,
+        modalState: true
+      }
+    })
+  }
 
+  useEffect(() => {
     openTableSelectionModal();
   }, [])
 
@@ -122,6 +173,26 @@ const Menu = (props) => {
     )
   })
 
+  const sendOrders = (event) => {
+    event.preventDefault();
+    console.log('la mesa', table, orders)
+    db.collection('Orders').add({
+      state: orders.state,
+      table: table,
+      products: orders.ordersList,
+      total: orders.total,
+      pendingSince: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    .then(() => {
+      console.log('Pedido agregado a la base de datos');
+      setChangeTable(true);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
+
+
   const signOut = () => {
     auth.signOut();
     props.onSignOut(false);
@@ -131,21 +202,29 @@ const Menu = (props) => {
   console.log(table);
   return (
     <Fragment>
-
+        <VerificationModal modalState={verificationModalState.modalState} closeModal={closeVerificationModal} sendOrders={sendOrders} />
+       <AlertModal modalState={alertModalState.modalState} closeModal={closeAlertModal} />
        <TableSelectionModal modalState={tableModal.modalState} addTable={addTable} table={table} changeTable={() => alert('Cambiando mesa')} closeModal={closeModal}/>
       <Header />
       <main className={style.menu}>
-      <button onClick={signOut}>Cerrar sesión</button>
+        <div className={style.logoutContainer}>
+          <button style={{marginRight: '1rem'}} onClick={signOut}>Cerrar sesión</button>
+          <button onClick={openTableSelectionModal}>Cambiar mesa</button>
+        </div>
 
-        <section>
-          <h1>Menú con lista de productos</h1>
-          <table>
-            <tbody>
-            {productsList}
-            </tbody>
-          </table>
+
+        <section className={style.menuAndOrderWrapper}>
+          <section className={style.menuContainer}>
+            <h1>Menú</h1>
+            <table>
+              <tbody>
+              {productsList}
+              </tbody>
+            </table>
+          </section>
+          <Orders table={table} orders={orders} verifyOrAlert={verifyOrAlert} changeTable={changeTable} />
         </section>
-        <Orders table={table} orders={orders} />
+
       </main>
     </Fragment>
   );

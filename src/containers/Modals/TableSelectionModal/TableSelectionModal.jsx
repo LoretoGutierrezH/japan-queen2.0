@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import style from './TableSelectionModal.module.css';
 
 
@@ -7,7 +8,7 @@ const TableSelectionModal = (props) => {
     <article className={props.modalState ? style.modalWrapper : style.hidden}>
       <section className={style.modalContent}>
         <h5>Selecciona una mesa para tomar el pedido.</h5>
-          <select onChange={props.addTable} name="table" defaultValue="0">
+          <select style={{margin: '3rem', padding: '1rem'}} onChange={props.addTable} name="table" defaultValue="0">
             <option value="1">Mesa 1</option>
             <option value="2">Mesa 2</option>
             <option value="3">Mesa 3</option>
@@ -18,8 +19,11 @@ const TableSelectionModal = (props) => {
             <option value="8">Mesa 9</option>
             <option value="10">Mesa 10</option>
           </select>
-          {props.table !== null ? <p>Seleccionaste la mesa {props.table}.<br />Haz click en el botón para confirmar tu selección.</p> : null}
-          <button onClick={props.closeModal}>Confirmar</button>
+          <section className={style.controlsContainer}>
+            <button style={{margin: '1rem 2rem', padding: '1rem 3rem', backgroundColor: '#ED1522', color: 'white'}} onClick={props.closeModal}>Confirmar</button>
+            <Link to="/mesero"><button style={{margin: '1rem 2rem', padding: '1rem 4rem', backgroundColor: '#ED1522', color: 'white'}}>Atrás</button></Link>
+          </section>
+          
       </section>
     </article>
   );

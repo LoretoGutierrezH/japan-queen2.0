@@ -2,4 +2,22 @@
     background-color:  #CF152D;
     color: white;
     min-height: 100vh;
+    
+}
+
+.menuAndOrderWrapper {
+  display: flex;
+  margin-top: 5rem;
+}
+
+.menuContainer {
+    width: 40%;
+    margin-left: 9rem;
+}
+
+.logoutContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    padding-right: 1rem;
 }
