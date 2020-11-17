@@ -65,7 +65,7 @@ const Orders = (props) => {
       table: props.table,
       products: props.orders.ordersList,
       total: props.orders.total,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      pendingSince: firebase.firestore.FieldValue.serverTimestamp()
     })
     .then(() => {
       console.log('Pedido agregado a la base de datos');

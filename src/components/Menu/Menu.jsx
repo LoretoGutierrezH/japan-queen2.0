@@ -5,6 +5,9 @@ import Product from '../Product/Product.jsx';
 import style from './Menu.module.css';
 import Orders from '../Order/Orders.jsx';
 import TableSelectionModal from '../../containers/Modals/TableSelectionModal/TableSelectionModal.jsx';
+import firebase, {auth} from '../../firebase';
+import {connect} from 'react-redux';
+import * as actionTypes from '../../store/actionTypes';
 
 
 const Menu = (props) => {
@@ -119,12 +122,21 @@ const Menu = (props) => {
     )
   })
 
+  const signOut = () => {
+    auth.signOut();
+    props.onSignOut(false);
+    console.log('Sesión cerrada');
+  }
+
   console.log(table);
   return (
     <Fragment>
+
        <TableSelectionModal modalState={tableModal.modalState} addTable={addTable} table={table} changeTable={() => alert('Cambiando mesa')} closeModal={closeModal}/>
       <Header />
       <main className={style.menu}>
+      <button onClick={signOut}>Cerrar sesión</button>
+
         <section>
           <h1>Menú con lista de productos</h1>
           <table>
@@ -138,5 +150,18 @@ const Menu = (props) => {
     </Fragment>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    authenticated: state.authenticated,
+    role: state.role
+  }
+}
 
-export default Menu;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSignOut: (authValue) => dispatch({type: actionTypes.AUTHENTICATE, value: authValue})
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

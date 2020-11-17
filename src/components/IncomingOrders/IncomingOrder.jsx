@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import style from './IncomingOrders.module.css';
 import Counter from '../Counter/Counter.jsx';
-import firebase, {db} from '../../firebase';
+import firebase, {auth, db} from '../../firebase';
+
 
 const IncomingOrder = (props) => {
   const [counter, setCounter] = useState({timeToFinish: 0})
@@ -10,6 +11,12 @@ const IncomingOrder = (props) => {
   const products = props.products.map(product => {
     return <li>{product.productName}</li>
   });
+
+  const signOut = () => {
+    auth.signOut();
+    props.onSignOut(false);
+    console.log('Sesión cerrada');
+  }
 
   const startCounter = () => {
     let time = 0;
@@ -31,7 +38,8 @@ const IncomingOrder = (props) => {
   const updateOrder = (obj) => {
     db.collection('Orders').doc(`${props.id}`).update({
       preparationTime: `${obj.h}:${obj.m}:${obj.s}`,
-      state: 'ready'
+      state: 'ready',
+      readySince: firebase.firestore.FieldValue.serverTimestamp()
     })
   }
 
@@ -63,6 +71,7 @@ const IncomingOrder = (props) => {
 
   return (
       <article className={style.orderCard}>
+
         <section className={style.orderDetails}>
           <h5>Mesa {props.table}</h5>
           <ul className={style.productsList}>

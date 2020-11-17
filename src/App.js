@@ -48,8 +48,6 @@ const  App = (props) => {
   return (
     <Router>
         <Redirect to={path} />
-        <button onClick={signOut}>Cerrar sesión</button>
-
         <Switch>
           <Route path="/" exact>
             <WelcomePage openModal={openModal} />

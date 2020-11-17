@@ -14,9 +14,10 @@ const IncomingOrders = (props) => {
     props.onSignOut(false);
     console.log('Sesión cerrada');
   }
+
  
   useEffect(() => {
-    const unsuscribe = db.collection('Orders').where('state', '==', 'pending').orderBy('timestamp', 'desc').onSnapshot(docs => {
+    const unsuscribe = db.collection('Orders').where('state', '==', 'pending').orderBy('pendingSince', 'desc').onSnapshot(docs => {
       const orders = [];
       docs.forEach(doc => {
          orders.push({id: doc.id, ...doc.data()});
@@ -32,6 +33,8 @@ const IncomingOrders = (props) => {
   const renderedIncomingOrders = ordersState.map(order => {
     return <IncomingOrder  key={order.id} id={order.id} table={order.table} products={order.products} />
   });
+
+  console.log(ordersState)
 
   return (
     <Fragment>
